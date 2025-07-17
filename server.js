@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 const PORT = parseInt(process.env.PORT) || 5000;
 
-// CORS – hanya izinkan request dari frontend Vercel kamu
+// ✅ CORS: Izinkan frontend Vercel
 app.use(cors({
   origin: "https://login-app-lovat-one.vercel.app",
   credentials: true,
@@ -19,20 +19,19 @@ app.use(cors({
 
 app.use(express.json());
 
+// ✅ API routes
 app.use("/api/auth", authRoutes);
 app.use("/api", passwordRoutes);
 
-app.get("/", (req, res) => res.send("✅ Backend is running"));
+// ✅ Root route (untuk Railway cek hidup)
+app.get("/", (req, res) => res.send("✅ Backend is running!"));
 
-// 🎯 Pastikan binding host dan port sesuai:
+// ✅ Listen di semua IP agar Railway bisa akses
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server berjalan di port ${PORT}`);
 });
 
+// (Optional) Log tiap 30 detik
 setInterval(() => {
   console.log("⏱ Server masih hidup...");
 }, 30000);
-
-app.get("/", (req, res) => {
-  res.send("✅ Backend is running!");
-});
