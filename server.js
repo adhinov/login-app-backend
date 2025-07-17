@@ -32,3 +32,7 @@ app.listen(PORT, "0.0.0.0", () => {
 setInterval(() => {
   console.log("⏱ Server masih hidup...");
 }, 30000);
+
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
+});
