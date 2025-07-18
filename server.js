@@ -3,8 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const db = require("./db");
+
 const authRoutes = require("./routes/auth");
 const passwordRoutes = require("./routes/passwordRoutes");
+const setupRoutes = require("./routes/setup"); // ✅ Tambahkan ini
 
 dotenv.config();
 
@@ -22,6 +24,7 @@ app.use(express.json());
 // ✅ API routes
 app.use("/api/auth", authRoutes);
 app.use("/api", passwordRoutes);
+app.use("/api/setup", setupRoutes); // ✅ Tambahkan ini juga
 
 // ✅ Root route (untuk Railway cek hidup)
 app.get("/", (req, res) => res.send("✅ Backend is running!"));
@@ -31,7 +34,7 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server berjalan di port ${PORT}`);
 });
 
-// (Optional) Log tiap 30 detik
+// (Optional) Log tiap 30 detik agar Railway tidak idle
 setInterval(() => {
   console.log("⏱ Server masih hidup...");
 }, 30000);
