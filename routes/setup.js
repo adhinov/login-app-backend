@@ -5,7 +5,7 @@ const db = require("../db");
 // 🔥 Hapus tabel users
 router.get("/drop-users-table", async (req, res) => {
   try {
-    await db.promise().query("DROP TABLE IF EXISTS users");
+    await db.query("DROP TABLE IF EXISTS users");
     res.send("✅ Tabel 'users' berhasil dihapus");
   } catch (err) {
     console.error("❌ Gagal hapus tabel:", err);
@@ -26,7 +26,7 @@ router.get("/create-users-table", async (req, res) => {
     )
   `;
   try {
-    await db.promise().query(createQuery);
+    await db.query(createQuery);
     res.send("✅ Tabel 'users' berhasil dibuat");
   } catch (err) {
     console.error("❌ Gagal buat tabel:", err);
